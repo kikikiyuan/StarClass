@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script type="text/javascript">
+        function loadXMLDoc()
+            {
+            var xmlhttp;
+            if (window.XMLHttpRequest) {
+                xmlhttp = new XMLHttpRequest();
+            }
+            else {
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    document.getElementById("mulu").innerHTML = xmlhttp.responseText;
+                }
+            }
+            xmlhttp.open("GET", "https://api.github.com/repos/StarITStu/StarClass/contents", true);
+            xmlhttp.send();
+        }
+        loadXMLDoc();
+    </script>
+</head>
+<body>
+    <div id="mulu"><h2></h2></div>
+</body>
+</html>
