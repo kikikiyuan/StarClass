@@ -1,26 +1,43 @@
-<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
+    <script type="text/javascript">
+        function loadXMLDoc() {
+            var xmlhttp;
+            if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+            }
+            else {// code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    c = xmlhttp.responseText;
+                    var mydata = JSON.parse(c);
+                    document.getElementById("name0").innerHTML = mydata[0].name;
+                    document.getElementById("url0").href = mydata[0].download_url;
+                    document.getElementById("1url0").innerHTML = mydata[0].download_url;
+                    document.getElementById("name1").innerHTML = mydata[1].name;
+                    document.getElementById("url1").href = mydata[1].download_url;
+                    document.getElementById("1url1").innerHTML = mydata[1].download_url;
+                }
+                else
+                {
+                    alert("您的请求次数超过限定，请下一个小时再次打开");
+                }
+            }
+            
+            xmlhttp.open("GET", "https://api.github.com/repos/StarITStu/StarClass/contents", true);
+            xmlhttp.send();
+        }
+        loadXMLDoc();
+    </script>
 </head>
 <body>
-    <script type="text/javascript" src="data.json"></script>
-    <script type="text/javascript">
-        var mydata = JSON.parse(data);
-    </script>
-    <p >文件名：<span id="name0"></span></p>
-    <p>网址:<a id="url0"   href=""><span id="1url0"></span></a></p>
-    <p >文件名：<span id="name1"></span></p>
-    <p>网址:<a id="url1"   href=""><span id="1url1"></span></a></p>
-    <script>
-        document.getElementById("name0").innerHTML = mydata[0].name; 
-        document.getElementById("url0").href = mydata[0].download_url;
-        document.getElementById("1url0").innerHTML=mydata[0].download_url;
-	document.getElementById("name1").innerHTML = mydata[1].name; 
-        document.getElementById("url1").href = mydata[1].download_url;
-        document.getElementById("1url1").innerHTML=mydata[1].download_url;
-     
-        
-    </script>
+    <h1>starclass</h1>
+    <p>文件名：<span id="name0"></span></p>
+    <p>网址:<a id="url0" href=""><span id="1url0"></span></a></p>
+    <p>文件名：<span id="name1"></span></p>
+    <p>网址:<a id="url1" href=""><span id="1url1"></span></a></p>
 </body>
 </html>
+
